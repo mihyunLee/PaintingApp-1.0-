@@ -52,6 +52,12 @@ body {
   transform: scale(0.98);
 }
 
+.controls__btns .erasing {
+  border-color: #006dff;
+  background-color: #006dff;
+  color: white;
+}
+
 .controls .controls__colors {
   display: flex;
 }
@@ -62,10 +68,4 @@ body {
   border-radius: 25px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.controls__btns .erasing{
-  border-color: #006dff;
-  background-color: #006dff;
-  color: white;
 }

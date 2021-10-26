@@ -33,17 +33,17 @@ function onMouseMove(event) {
     // x, y의 좌표에 따라 path 생성
     ctx.beginPath();
     ctx.moveTo(x, y);
-  } else if(erasing){
+  } else if (erasing) {
     //사각형 모양으로 지우기
-    ctx.clearRect(x, y, ctx.lineWidth*5, ctx.lineWidth*5);
-  } else{
+    ctx.clearRect(x, y, ctx.lineWidth * 5, ctx.lineWidth * 5);
+  } else {
     // x, y의 좌표에 따라 line 그리기
     ctx.lineTo(x, y);
     ctx.stroke();
-  } 
+  }
 }
 
-function onMouseEnter(event){
+function onMouseEnter(event) {
   const x = event.offsetX;
   const y = event.offsetY;
   ctx.moveTo(x, y);
@@ -79,7 +79,7 @@ function handleModeClick() {
 }
 
 function handleCanvasClick() {
-  if (filling && (!erasing)) {
+  if (filling && !erasing) {
     // filling 모드이면서 erase 모드가 아닐 때만 코드 수행
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
@@ -98,11 +98,11 @@ function handleSaveClick() {
   link.click();
 }
 
-function handleEraseClick(){
-  if (erasing === true){
+function handleEraseClick() {
+  if (erasing === true) {
     erasing = false;
     mode.disabled = false;
-  } else{
+  } else {
     erasing = true;
     mode.disabled = true;
   }
@@ -134,6 +134,6 @@ if (saveBtn) {
   saveBtn.addEventListener("click", handleSaveClick);
 }
 
-if (eraser){
+if (eraser) {
   eraser.addEventListener("click", handleEraseClick);
 }
