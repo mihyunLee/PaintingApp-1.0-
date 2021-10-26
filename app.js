@@ -4,6 +4,7 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+const eraser = document.getElementById("jsEraser");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 700;
@@ -22,6 +23,7 @@ ctx.lineWidth = 2.5; // pen의 dafault lineWidth
 
 let painting = false;
 let filling = false;
+let erasing = false;
 
 function onMouseMove(event) {
   // canvas 내에서 마우스 위치 가져오기
@@ -31,11 +33,14 @@ function onMouseMove(event) {
     // x, y의 좌표에 따라 path 생성
     ctx.beginPath();
     ctx.moveTo(x, y);
-  } else {
+  } else if(erasing){
+    //사각형 모양으로 지우기
+    ctx.clearRect(x, y, ctx.lineWidth*5, ctx.lineWidth*5);
+  } else{
     // x, y의 좌표에 따라 line 그리기
     ctx.lineTo(x, y);
     ctx.stroke();
-  }
+  } 
 }
 
 function stopPainting() {
@@ -68,7 +73,8 @@ function handleModeClick() {
 }
 
 function handleCanvasClick() {
-  if (filling) {
+  if (filling && (!erasing)) {
+    // filling 모드이면서 erase 모드가 아닐 때만 코드 수행
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 }
@@ -86,11 +92,22 @@ function handleSaveClick() {
   link.click();
 }
 
+function handleEraseClick(){
+  if (erasing === true){
+    erasing = false;
+    mode.disabled = false;
+  } else{
+    erasing = true;
+    mode.disabled = true;
+  }
+  eraser.classList.toggle("erasing");
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
-  canvas.addEventListener("mouseleave", stopPainting);
+  canvas.addEventListener("mouseleave", stopPainting)
   canvas.addEventListener("click", handleCanvasClick);
   canvas.addEventListener("contextmenu", handleCM);
 }
@@ -103,11 +120,14 @@ Array.from(colors).forEach((color) =>
 if (range) {
   range.addEventListener("input", handleRangeChange);
 }
-
 if (mode) {
   mode.addEventListener("click", handleModeClick);
 }
 
 if (saveBtn) {
   saveBtn.addEventListener("click", handleSaveClick);
+}
+
+if (eraser){
+  eraser.addEventListener("click", handleEraseClick);
 }
