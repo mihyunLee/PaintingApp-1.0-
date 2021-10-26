@@ -43,6 +43,12 @@ function onMouseMove(event) {
   } 
 }
 
+function onMouseEnter(event){
+  const x = event.offsetX;
+  const y = event.offsetY;
+  ctx.moveTo(x, y);
+}
+
 function stopPainting() {
   painting = false;
 }
@@ -107,7 +113,7 @@ if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
-  canvas.addEventListener("mouseleave", stopPainting)
+  canvas.addEventListener("mouseenter", onMouseEnter);
   canvas.addEventListener("click", handleCanvasClick);
   canvas.addEventListener("contextmenu", handleCM);
 }
