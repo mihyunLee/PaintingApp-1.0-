@@ -54,7 +54,7 @@ function stopPainting() {
 }
 
 function startPainting() {
-  if (!filling) {
+  if (!filling || erasing) {
     painting = true;
   }
 }
