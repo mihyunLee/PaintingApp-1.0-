@@ -5,6 +5,7 @@ const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
 const eraser = document.getElementById("jsEraser");
+const modeText = document.getElementById("jsModeText");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 700;
@@ -74,9 +75,11 @@ function handleModeClick() {
   if (filling === true) {
     filling = false;
     mode.innerText = "Fill";
+    modeText.innerText = "Fill";
   } else {
     filling = true;
     mode.innerText = "Paint";
+    modeText.innerText = "Paint";
   }
 }
 
